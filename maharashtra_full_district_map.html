@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maharashtra Cultural Map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    svg { width: 90%; height: auto; margin: auto; display: block; }
+    .district { fill: #87CEEB; stroke: #333; stroke-width: 1px; transition: 0.3s; }
+    .district:hover { fill: orange; cursor: pointer; }
+  </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center p-6">
+  <h1 class="text-3xl font-bold mb-6">Cultural Map of Maharashtra</h1>
+
+  <!-- Injected SVG (replace placeholder below with the full SVG content provided by the user) -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" aria-labelledby="title desc" role="img">
+    <title id="title">Maharashtra Cultural Map (placeholder)</title>
+    <desc id="desc">Interactive map of Maharashtra districts. Replace this placeholder with the full SVG.</desc>
+    <rect x="0" y="0" width="800" height="600" fill="#e5e7eb" />
+    <g id="placeholder-districts">
+      <rect id="district-1" class="district" x="100" y="150" width="200" height="150" />
+      <rect id="district-2" class="district" x="350" y="220" width="200" height="150" />
+    </g>
+  </svg>
+
+  <!-- Modal -->
+  <div id="districtModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-lg w-11/12 md:w-2/3 lg:w-1/2 p-6 relative">
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-black text-xl" aria-label="Close">&times;</button>
+      <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+      <p><strong>Cuisine:</strong> <span id="modalCuisine"></span></p>
+      <p><strong>Arts:</strong> <span id="modalArts"></span></p>
+      <p><strong>Sites:</strong> <span id="modalSites"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const culturalData = {
+      "district-1": { title: "Placeholder District 1", cuisine: "Sample cuisine", arts: "Sample arts", sites: "Sample sites" },
+      "district-2": { title: "Placeholder District 2", cuisine: "Sample cuisine", arts: "Sample arts", sites: "Sample sites" }
+    };
+
+    function openModal(districtId) {
+      const data = culturalData[districtId] || { title: districtId, cuisine: "N/A", arts: "N/A", sites: "N/A" };
+      document.getElementById("modalTitle").textContent = data.title;
+      document.getElementById("modalCuisine").textContent = data.cuisine;
+      document.getElementById("modalArts").textContent = data.arts;
+      document.getElementById("modalSites").textContent = data.sites;
+      document.getElementById("districtModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("districtModal").classList.add("hidden");
+    }
+
+    document.querySelectorAll(".district").forEach(district => {
+      district.addEventListener("click", () => openModal(district.id));
+      district.setAttribute("tabindex", "0");
+      district.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") openModal(district.id);
+      });
+    });
+  </script>
+</body>
+</html>

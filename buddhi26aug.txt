@@ -379,6 +379,21 @@
 					</div>
 				</div>
 
+				<!-- Divider -->
+				<hr class="border-gray-200">
+
+				<!-- Cultural Map Section -->
+				<div id="map-section" class="p-4 md:p-8">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Cultural Map of Maharashtra</h2>
+					<div class="relative w-full max-w-5xl mx-auto rounded-lg shadow-md overflow-hidden bg-gray-100" style="aspect-ratio: 16 / 10;">
+						<iframe src="maharashtra_full_district_map.html" title="Maharashtra Cultural Map" loading="lazy" class="w-full h-full" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
+					</div>
+					<p class="text-center text-sm text-gray-500 mt-2">Tap or click on a district to explore cultural highlights.</p>
+				</div>
+
+				<!-- Divider -->
+				<hr class="border-gray-200">
+
 				<!-- Newsletter Signup Section -->
 				<div class="bg-amber-600 p-8">
 					<div class="max-w-xl mx-auto text-center">
@@ -407,7 +422,7 @@
 				</footer>
 			</div>
 		</div>
-
+		
 		<!-- ================================================== -->
 		<!-- Article & Other Pages Content (Initially Hidden)   -->
 		<!-- ================================================== -->
