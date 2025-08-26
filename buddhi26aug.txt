@@ -1,851 +1,905 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A website dedicated to the rich culture, literature, and art of Maharashtra. Explore articles, a photo gallery, and a poetry corner celebrating Marathi heritage.">
-    <meta name="keywords" content="Maharashtra, Marathi, Culture, Literature, Art, History, India, Pu La Deshpande, Yayati">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
-    <title>बुद्धिशाही! | A Celebration of Marathi Culture</title>
-    <style>
-        html {
-            scroll-behavior: smooth; /* Enables smooth scrolling for the whole page */
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .logo-font {
-            font-family: 'Tiro Devanagari Marathi', serif;
-        }
-        .artistic-font {
-            font-family: 'Yatra One', cursive;
-        }
-        /* Custom utility to hide scrollbars */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        /* Style for the full-screen hero section */
-        .hero-section {
-            background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        /* Continuous scroll animation */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-scroll {
-            animation: scroll 40s linear infinite;
-        }
-        .paused {
-            animation-play-state: paused;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A website dedicated to the rich culture, literature, and art of Maharashtra. Explore articles, a photo gallery, and a poetry corner celebrating Marathi heritage.">
+	<meta name="keywords" content="Maharashtra, Marathi, Culture, Literature, Art, History, India, Pu La Deshpande, Yayati">
+	<script src="https://cdn.tailwindcss.com"></script>
 
-        /* Lightbox styles */
-        .lightbox {
-            transition: opacity 0.3s ease;
-        }
-        .lightbox img {
-            transition: transform 0.3s ease;
-            max-width: 85vw;
-            max-height: 80vh;
-        }
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tiro+Devanagari+Marathi&family=Yatra+One&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+	<link rel="preconnect" href="https://i.ibb.co" crossorigin>
+	<link rel="preconnect" href="https://picsum.photos" crossorigin>
+	<link rel="preload" as="image" href="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop" fetchpriority="high" crossorigin>
+	<link rel="preload" as="image" href="https://i.ibb.co/YFV8fb6W/buddhishahi-background.png" crossorigin>
+	<title>बुद्धिशाही! | A Celebration of Marathi Culture</title>
+	<style>
+		html {
+			scroll-behavior: smooth; /* Enables smooth scrolling for the whole page */
+		}
+		body {
+			font-family: 'Inter', sans-serif;
+		}
+		.logo-font {
+			font-family: 'Tiro Devanagari Marathi', serif;
+		}
+		.artistic-font {
+			font-family: 'Yatra One', cursive;
+		}
+		/* Custom utility to hide scrollbars */
+		.no-scrollbar::-webkit-scrollbar {
+			display: none;
+		}
+		.no-scrollbar {
+			-ms-overflow-style: none;  /* IE and Edge */
+			scrollbar-width: none;  /* Firefox */
+		}
+		/* Style for the full-screen hero section */
+		.hero-section {
+			background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop');
+			background-size: cover;
+			background-position: center;
+		}
+		
+		/* Continuous scroll animation */
+		@keyframes scroll {
+			0% { transform: translateX(0); }
+			100% { transform: translateX(-50%); }
+		}
+		.animate-scroll {
+			animation: scroll 40s linear infinite;
+		}
+		.paused {
+			animation-play-state: paused;
+		}
 
-        /* --- Scramble Typing Effect --- */
-        .animated-heading {
-            position: relative;
-            display: inline-block;
-        }
-        .animated-heading span {
-            display: inline-block;
-            min-width: 0.5em; 
-            text-align: center;
-            transition: color 0.1s ease-in-out, opacity 0.3s ease-in-out;
-        }
-        .animated-heading.typing-done {
-            transition: text-shadow 0.4s ease-in-out;
-            cursor: pointer;
-        }
-        .animated-heading.typing-done:hover {
-            text-shadow: 0 0 8px var(--glow-color, #ffffff), 
-                         0 0 20px var(--glow-color, #ffffff);
-        }
-        .subheading {
-            color: #ccc;
-            margin-top: 1rem;
-            letter-spacing: 0.2em;
-            opacity: 0;
-            transition: opacity 1.5s ease-out;
-        }
-        .particle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-        }
-        /* Form validation styles */
-        .form-error {
-            color: #ef4444; /* red-500 */
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-    </style>
+		/* Lightbox styles */
+		.lightbox {
+			transition: opacity 0.3s ease;
+		}
+		.lightbox img {
+			transition: transform 0.3s ease;
+			max-width: 85vw;
+			max-height: 80vh;
+		}
+
+		/* --- Scramble Typing Effect --- */
+		.animated-heading {
+			position: relative;
+			display: inline-block;
+		}
+		.animated-heading span {
+			display: inline-block;
+			min-width: 0.5em; 
+			text-align: center;
+			transition: color 0.1s ease-in-out, opacity 0.3s ease-in-out;
+		}
+		.animated-heading.typing-done {
+			transition: text-shadow 0.4s ease-in-out;
+			cursor: pointer;
+		}
+		.animated-heading.typing-done:hover {
+			text-shadow: 0 0 8px var(--glow-color, #ffffff), 
+						 0 0 20px var(--glow-color, #ffffff);
+		}
+		.subheading {
+			color: #ccc;
+			margin-top: 1rem;
+			letter-spacing: 0.2em;
+			opacity: 0;
+			transition: opacity 1.5s ease-out;
+		}
+		.particle {
+			position: absolute;
+			background: white;
+			border-radius: 50%;
+		}
+		/* Form validation styles */
+		.form-error {
+			color: #ef4444; /* red-500 */
+			font-size: 0.875rem;
+			margin-top: 0.25rem;
+		}
+
+		/* Reduce motion for users who prefer it */
+		@media (prefers-reduced-motion: reduce) {
+			.animate-scroll { animation: none !important; }
+		}
+
+		/* Interactive map styles */
+		#map-root svg { width: 100%; height: auto; display: block; }
+		#map-root .mh-district {
+			cursor: pointer;
+			transition: fill 0.12s ease, stroke 0.12s ease, filter 0.12s ease;
+			outline: none;
+		}
+		#map-root .mh-district:hover, #map-root .mh-district:focus {
+			filter: brightness(1.06);
+			stroke: rgba(17,24,39,0.9);
+			stroke-width: 1.25;
+		}
+		#map-root .mh-district.selected {
+			fill: #f59e0b !important;
+			stroke: rgba(17,24,39,0.95);
+			stroke-width: 1.5;
+		}
+		#map-tooltip {
+			position: absolute;
+			z-index: 10;
+			pointer-events: none;
+			background: rgba(17,24,39,0.92);
+			color: white;
+			padding: 6px 10px;
+			border-radius: 6px;
+			font-size: 0.875rem;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+			transform: translate(-9999px, -9999px);
+		}
+		#map-skeleton {
+			height: 360px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #6b7280;
+			background-image: linear-gradient(90deg, rgba(243,244,246,0) 0%, rgba(243,244,246,0.7) 50%, rgba(243,244,246,0) 100%);
+			background-size: 200% 100%;
+			animation: skeleton 1.2s ease-in-out infinite;
+		}
+		@keyframes skeleton {
+			0% { background-position: 200% 0; }
+			100% { background-position: -200% 0; }
+		}
+	</style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <!-- Lightbox Overlay -->
-    <div id="lightbox" class="lightbox hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-        <img id="lightbox-img" src="" alt="Enlarged gallery image" class="rounded-lg shadow-2xl">
-        <button id="lightbox-close" aria-label="Close lightbox" class="absolute top-4 right-6 text-white text-5xl font-bold hover:text-gray-300 transition">&times;</button>
-        <button id="lightbox-prev" aria-label="Previous image" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition">&larr;</button>
-        <button id="lightbox-next" aria-label="Next image" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition">&rarr;</button>
-    </div>
+	<!-- Lightbox Overlay -->
+	<div id="lightbox" class="lightbox hidden fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+		<img id="lightbox-img" src="" alt="Enlarged gallery image" class="rounded-lg shadow-2xl">
+		<button id="lightbox-close" aria-label="Close lightbox" class="absolute top-4 right-6 text-white text-5xl font-bold hover:text-gray-300 transition">&times;</button>
+		<button id="lightbox-prev" aria-label="Previous image" class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition">&larr;</button>
+		<button id="lightbox-next" aria-label="Next image" class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition">&rarr;</button>
+	</div>
 
-    <!-- Header -->
-    <header id="main-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 text-white">
-        <div class="px-4 py-3 flex justify-between items-center">
-            <a href="#" id="home-link" class="text-2xl font-bold logo-font">बुद्धिशाही!</a>
-            <nav class="hidden md:block">
-                <ul class="flex space-x-8">
-                    <li><a href="#about-section" class="nav-link hover:text-amber-300 transition-colors">About</a></li>
-                    <li><a href="#writeups-section" class="nav-link hover:text-amber-300 transition-colors">Writeups</a></li>
-                    <li><a href="#gallery-section" class="nav-link hover:text-amber-300 transition-colors">Gallery</a></li>
-                    <li><a href="#" id="poetry-link-nav" class="nav-link hover:text-amber-300 transition-colors">Poetry Corner</a></li>
-                    <li><a href="#" id="contact-link-nav" class="nav-link hover:text-amber-300 transition-colors">Contact</a></li>
-                </ul>
-            </nav>
-            <button id="mobile-menu-button" aria-label="Open navigation menu" class="md:hidden p-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-    </header>
+	<!-- Header -->
+	<header id="main-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 text-white">
+		<div class="px-4 py-3 flex justify-between items-center">
+			<a href="#" id="home-link" class="text-2xl font-bold logo-font">बुद्धिशाही!</a>
+			<nav class="hidden md:block">
+				<ul class="flex space-x-8">
+					<li><a href="#about-section" class="nav-link hover:text-amber-300 transition-colors">About</a></li>
+					<li><a href="#writeups-section" class="nav-link hover:text-amber-300 transition-colors">Writeups</a></li>
+					<li><a href="#gallery-section" class="nav-link hover:text-amber-300 transition-colors">Gallery</a></li>
+					<li><a href="#" id="poetry-link-nav" class="nav-link hover:text-amber-300 transition-colors">Poetry Corner</a></li>
+					<li><a href="#" id="contact-link-nav" class="nav-link hover:text-amber-300 transition-colors">Contact</a></li>
+				</ul>
+			</nav>
+			<button id="mobile-menu-button" aria-label="Open navigation menu" class="md:hidden p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+			</button>
+		</div>
+	</header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center">
-        <button id="mobile-menu-close-button" aria-label="Close navigation menu" class="absolute top-4 right-4 p-2 text-white">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <ul class="flex flex-col space-y-8 text-center text-2xl text-white">
-            <li><a href="#about-section" class="nav-link-mobile hover:text-amber-300 transition-colors">About</a></li>
-            <li><a href="#writeups-section" class="nav-link-mobile hover:text-amber-300 transition-colors">Writeups</a></li>
-            <li><a href="#gallery-section" class="nav-link-mobile hover:text-amber-300 transition-colors">Gallery</a></li>
-            <li><a href="#" id="poetry-link-nav-mobile" class="nav-link-mobile hover:text-amber-300 transition-colors">Poetry Corner</a></li>
-            <li><a href="#" id="contact-link-nav-mobile" class="nav-link-mobile hover:text-amber-300 transition-colors">Contact</a></li>
-        </ul>
-    </div>
+	<!-- Mobile Menu -->
+	<div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center">
+		<button id="mobile-menu-close-button" aria-label="Close navigation menu" class="absolute top-4 right-4 p-2 text-white">
+			<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+		</button>
+		<ul class="flex flex-col space-y-8 text-center text-2xl text-white">
+			<li><a href="#about-section" class="nav-link-mobile hover:text-amber-300 transition-colors">About</a></li>
+			<li><a href="#writeups-section" class="nav-link-mobile hover:text-amber-300 transition-colors">Writeups</a></li>
+			<li><a href="#gallery-section" class="nav-link-mobile hover:text-amber-300 transition-colors">Gallery</a></li>
+			<li><a href="#" id="poetry-link-nav-mobile" class="nav-link-mobile hover:text-amber-300 transition-colors">Poetry Corner</a></li>
+			<li><a href="#" id="contact-link-nav-mobile" class="nav-link-mobile hover:text-amber-300 transition-colors">Contact</a></li>
+		</ul>
+	</div>
 
-    <!-- Main Container -->
-    <div>
+	<!-- Main Container -->
+	<div>
 
-        <!-- ================================================== -->
-        <!-- Homepage Content (Initially Visible)               -->
-        <!-- ================================================== -->
-        <div id="home-page">
-            
-            <!-- Full-Screen Hero Section -->
-            <div id="hero-section" class="hero-section h-screen flex flex-col justify-center items-center text-center p-4 relative text-white">
-                <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-                <div class="relative z-10">
-                    <h1 class="animated-heading text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-normal logo-font">
-                        <!-- The script will populate this -->
-                    </h1>
-                    <h2 class="subheading text-xl sm:text-2xl md:text-3xl">
-                        साहित्य. संस्कृती. कला.
-                    </h2>
-                </div>
-            </div>
+		<!-- ================================================== -->
+		<!-- Homepage Content (Initially Visible)               -->
+		<!-- ================================================== -->
+		<div id="home-page">
+			
+			<!-- Full-Screen Hero Section -->
+			<div id="hero-section" class="hero-section h-screen flex flex-col justify-center items-center text-center p-4 relative text-white">
+				<div class="absolute inset-0 bg-black bg-opacity-60"></div>
+				<div class="relative z-10">
+					<h1 class="animated-heading text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-normal logo-font">
+						<!-- The script will populate this -->
+					</h1>
+					<h2 class="subheading text-xl sm:text-2xl md:text-3xl">
+						साहित्य. संस्कृती. कला.
+					</h2>
+				</div>
+			</div>
 
-            <!-- Full-Screen About Section -->
-            <div id="about-section" class="relative text-white h-screen flex items-center justify-center text-center" style="background-image: url('https://i.ibb.co/YFV8fb6W/buddhishahi-background.png'); background-size: cover; background-position: center;">
-                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-                <div class="relative z-10 p-4">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4 artistic-font">मराठी, महाराष्ट्र आणि अभिमान</h2>
-                    <p class="max-w-3xl mx-auto text-lg md:text-xl leading-relaxed text-gray-200 logo-font">
-                        मराठी ही फक्त भाषा नाही — ती आपल्या इतिहासाची, परंपरेची आणि विचारांची अमूल्य शिदोरी आहे. संतांच्या अभंगांपासून लावणीच्या ठेक्यापर्यंत, लोकगीतांच्या ओवींपासून आधुनिक साहित्यापर्यंत, प्रत्येक शब्दात भाव, प्रत्येक वाक्यात ज्ञान, आणि प्रत्येक गाण्यात परंपरेचा सुगंध आहे.
-                        <br><br>
-                        आपली संस्कृती हजारो वर्षांच्या कला, साहित्य, तत्त्वज्ञान आणि परस्पर सन्मानाच्या परंपरेतून घडली आहे — जी आपल्याला जोडते, आपली ओळख जपते, आणि पुढील पिढ्यांना विचारांचा वारसा देते.
-                    </p>
-                </div>
-            </div>
-            
-            <!-- Main Content Wrapper -->
-            <div class="bg-white overflow-hidden">
-                <!-- Featured Personality Section -->
-                <div class="p-4 md:p-8 bg-gray-50">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Featured Personality of the Week</h2>
-                    <div class="flex flex-col md:flex-row items-center bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
-                        <div class="w-full md:w-1/3">
-                            <img src="https://i.ibb.co/ZR4DXWNC/p-l.jpg" alt="A black and white portrait of Pu La Deshpande, a celebrated Marathi writer." class="rounded-full shadow-lg mx-auto h-48 w-48 object-cover">
-                        </div>
-                        <div class="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 text-center md:text-left">
-                            <h3 class="text-3xl font-bold text-gray-800 logo-font">पु. ल. देशपांडे</h3>
-                            <p class="text-md text-gray-500 mb-3">Poet, Playwright, Humorist</p>
-                            <p class="text-gray-700 leading-relaxed mb-4">
-                                Purushottam Laxman Deshpande, popularly known as "Pu La", was a legendary figure in Marathi literature. His unique brand of humor, masterful storytelling, and profound observations on life have left an indelible mark on Maharashtra's cultural landscape.
-                            </p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-5">Learn More &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="text-center mt-6">
-                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="personality-archive-page">View All Personalities &rarr;</a>
-                    </div>
-                </div>
+			<!-- Full-Screen About Section -->
+			<div id="about-section" class="relative text-white h-screen flex items-center justify-center text-center" style="background-image: url('https://i.ibb.co/YFV8fb6W/buddhishahi-background.png'); background-size: cover; background-position: center;">
+				<div class="absolute inset-0 bg-black bg-opacity-40"></div>
+				<div class="relative z-10 p-4">
+					<h2 class="text-4xl md:text-5xl font-bold mb-4 artistic-font">मराठी, महाराष्ट्र आणि अभिमान</h2>
+					<p class="max-w-3xl mx-auto text-lg md:text-xl leading-relaxed text-gray-200 logo-font">
+						मराठी ही फक्त भाषा नाही — ती आपल्या इतिहासाची, परंपरेची आणि विचारांची अमूल्य शिदोरी आहे. संतांच्या अभंगांपासून लावणीच्या ठेक्यापर्यंत, लोकगीतांच्या ओवींपासून आधुनिक साहित्यापर्यंत, प्रत्येक शब्दात भाव, प्रत्येक वाक्यात ज्ञान, आणि प्रत्येक गाण्यात परंपरेची गोडी आहे.
+						<br><br>
+						आपली संस्कृती हजारो वर्षांच्या कला, साहित्य, तत्त्वज्ञान आणि परस्पर सन्मानाच्या परंपरेतून घडली आहे — जी आपल्याला जोडते, आपली ओळख जपते, आणि पुढील पिढ्यांना विचारांचा वारसा देते.
+					</p>
+				</div>
+			</div>
+			
+			<!-- Main Content Wrapper -->
+			<div class="bg-white overflow-hidden">
+				<!-- Featured Personality Section -->
+				<div class="p-4 md:p-8 bg-gray-50">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Featured Personality of the Week</h2>
+					<div class="flex flex-col md:flex-row items-center bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+						<div class="w-full md:w-1/3">
+							<img src="https://i.ibb.co/ZR4DXWNC/p-l.jpg" alt="A black and white portrait of Pu La Deshpande, a celebrated Marathi writer." class="rounded-full shadow-lg mx-auto h-48 w-48 object-cover">
+						</div>
+						<div class="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 text-center md:text-left">
+							<h3 class="text-3xl font-bold text-gray-800 logo-font">पु. ल. देशपांडे</h3>
+							<p class="text-md text-gray-500 mb-3">Poet, Playwright, Humorist</p>
+							<p class="text-gray-700 leading-relaxed mb-4">
+								Purushottam Laxman Deshpande, popularly known as "Pu La", was a legendary figure in Marathi literature. His unique brand of humor, masterful storytelling, and profound observations on life have left an indelible mark on Maharashtra's cultural landscape.
+							</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-5">Learn More &rarr;</a>
+						</div>
+					</div>
+					<div class="text-center mt-6">
+						<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="personality-archive-page">View All Personalities &rarr;</a>
+					</div>
+				</div>
 
-                <!-- Divider -->
-                <hr class="border-gray-200">
-                
-                <!-- Book of the Month Section -->
-                <div class="p-4 md:p-8">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Book of the Month: August 2025</h2>
-                    <div class="flex flex-col md:flex-row items-center bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
-                        <div class="w-full md:w-1/3">
-                            <img src="https://i.ibb.co/tVmNwzq/yayati.jpg" alt="The book cover of 'Yayati' by V. S. Khandekar." class="rounded-lg shadow-lg mx-auto w-full max-w-xs object-cover">
-                        </div>
-                        <div class="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 text-center md:text-left">
-                            <h3 class="text-3xl font-bold text-gray-800 logo-font">ययाति</h3>
-                            <p class="text-md text-gray-500 mb-3">By V. S. Khandekar</p>
-                            <p class="text-gray-700 leading-relaxed mb-4">
-                                "Yayati" is a monumental work of Marathi literature that reinterprets the classical myth of King Yayati from the Mahabharata. It explores the timeless conflict between duty and desire, and the human quest for eternal happiness. A must-read for its profound philosophical insights.
-                            </p>
-                            <div class="flex items-center justify-center md:justify-start space-x-4">
-                                <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-6">Learn More &rarr;</a>
-                                <a href="#" class="bg-amber-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-6">
-                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="book-archive-page">View All Books &rarr;</a>
-                    </div>
-                </div>
+				<!-- Divider -->
+				<hr class="border-gray-200">
+				
+				<!-- Book of the Month Section -->
+				<div class="p-4 md:p-8">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Book of the Month: August 2025</h2>
+					<div class="flex flex-col md:flex-row items-center bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+						<div class="w-full md:w-1/3">
+							<img src="https://i.ibb.co/tVmNwzq/yayati.jpg" alt="The book cover of 'Yayati' by V. S. Khandekar." class="rounded-lg shadow-lg mx-auto w-full max-w-xs object-cover">
+						</div>
+						<div class="w-full md:w-2/3 mt-6 md:mt-0 md:pl-8 text-center md:text-left">
+							<h3 class="text-3xl font-bold text-gray-800 logo-font">ययाति</h3>
+							<p class="text-md text-gray-500 mb-3">By V. S. Khandekar</p>
+							<p class="text-gray-700 leading-relaxed mb-4">
+								"Yayati" is a monumental work of Marathi literature that reinterprets the classical myth of King Yayati from the Mahabharata. It explores the timeless conflict between duty and desire, and the human quest for eternal happiness. A must-read for its profound philosophical insights.
+							</p>
+							<div class="flex items-center justify-center md:justify-start space-x-4">
+								<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-6">Learn More &rarr;</a>
+								<a href="#" class="bg-amber-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors">Buy Now</a>
+							</div>
+						</div>
+					</div>
+					<div class="text-center mt-6">
+						<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="book-archive-page">View All Books &rarr;</a>
+					</div>
+				</div>
 
-                <!-- Divider -->
-                <hr class="border-gray-200">
+				<!-- Divider -->
+				<hr class="border-gray-200">
 
-                <!-- Recent Writeups Section with Slider -->
-                <div id="writeups-section" class="p-4 md:p-8">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Recent Writeups</h2>
-                    <div class="relative max-w-4xl mx-auto">
-                        <!-- Slider Container -->
-                        <div id="writeups-container" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar -mx-2">
-                            <!-- Writeup Card 1 -->
-                            <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
-                                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                                    <img src="https://picsum.photos/seed/writeup1/400/300" alt="An open book with a warm light." class="w-full h-40 object-cover">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-bold text-lg logo-font">बुद्धिशाही: एक ओळख</h3>
-                                        <p class="text-xs text-gray-500 mb-2">By Team बुद्धिशाही | 09 Aug 2025</p>
-                                        <p class="text-gray-700 text-sm flex-grow">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा...</p>
-                                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-1">Read More &rarr;</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Writeup Card 2 -->
-                            <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
-                                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                                    <img src="https://picsum.photos/seed/writeup2/400/300" alt="A classic Marathi book on a wooden table." class="w-full h-40 object-cover">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-bold text-lg">मराठी रंगभूमीचा प्रवास</h3>
-                                        <p class="text-xs text-gray-500 mb-2">By P. Deshpande | 02 Aug 2025</p>
-                                        <p class="text-gray-700 text-sm flex-grow">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा.</p>
-                                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-2">Read More &rarr;</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Writeup Card 3 -->
-                            <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
-                                 <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                                    <img src="https://picsum.photos/seed/writeup3/400/300" alt="A close-up of a traditional Warli painting." class="w-full h-40 object-cover">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-bold text-lg">वारली चित्रकला: एक प्राचीन कला</h3>
-                                        <p class="text-xs text-gray-500 mb-2">By S. Kulkarni | 28 Jul 2025</p>
-                                        <p class="text-gray-700 text-sm flex-grow">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध.</p>
-                                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-3">Read More &rarr;</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Writeup Card 4 -->
-                            <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
-                                <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                                    <img src="https://picsum.photos/seed/food/400/300" alt="A colorful Maharashtrian thali with various dishes." class="w-full h-40 object-cover">
-                                    <div class="p-4 flex flex-col flex-grow">
-                                        <h3 class="font-bold text-lg">महाराष्ट्रातील खाद्यसंस्कृती</h3>
-                                        <p class="text-xs text-gray-500 mb-2">By A. Patil | 15 Aug 2025</p>
-                                        <p class="text-gray-700 text-sm flex-grow">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे...</p>
-                                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-4">Read More &rarr;</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Left Arrow -->
-                        <button id="scroll-left-btn" aria-label="Scroll left" class="absolute top-1/2 left-0 -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition">
-                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-                        <!-- Right Arrow -->
-                        <button id="scroll-right-btn" aria-label="Scroll right" class="absolute top-1/2 right-0 -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition">
-                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
-                    </div>
-                     <div class="text-center mt-6">
-                        <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="archive-page">View All Articles &rarr;</a>
-                    </div>
-                </div>
+				<!-- Recent Writeups Section with Slider -->
+				<div id="writeups-section" class="p-4 md:p-8">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Recent Writeups</h2>
+					<div class="relative max-w-4xl mx-auto">
+						<!-- Slider Container -->
+						<div id="writeups-container" class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar -mx-2">
+							<!-- Writeup Card 1 -->
+							<div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
+								<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+									<img src="https://picsum.photos/seed/writeup1/400/300" alt="An open book with a warm light." class="w-full h-40 object-cover">
+									<div class="p-4 flex flex-col flex-grow">
+										<h3 class="font-bold text-lg logo-font">बुद्धिशाही: एक ओळख</h3>
+										<p class="text-xs text-gray-500 mb-2">By Team बुद्धिशाही | 09 Aug 2025</p>
+										<p class="text-gray-700 text-sm flex-grow">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा...</p>
+										<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-1">Read More &rarr;</a>
+									</div>
+								</div>
+							</div>
+							<!-- Writeup Card 2 -->
+							<div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
+								<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+									<img src="https://picsum.photos/seed/writeup2/400/300" alt="A classic Marathi book on a wooden table." class="w-full h-40 object-cover">
+									<div class="p-4 flex flex-col flex-grow">
+										<h3 class="font-bold text-lg">मराठी रंगभूमीचा प्रवास</h3>
+										<p class="text-xs text-gray-500 mb-2">By P. Deshpande | 02 Aug 2025</p>
+										<p class="text-gray-700 text-sm flex-grow">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा.</p>
+										<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-2">Read More &rarr;</a>
+									</div>
+								</div>
+							</div>
+							<!-- Writeup Card 3 -->
+							<div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
+								 <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+									<img src="https://picsum.photos/seed/writeup3/400/300" alt="A close-up of a traditional Warli painting." class="w-full h-40 object-cover">
+									<div class="p-4 flex flex-col flex-grow">
+										<h3 class="font-bold text-lg">वारली चित्रकला: एक प्राचीन कला</h3>
+										<p class="text-xs text-gray-500 mb-2">By S. Kulkarni | 28 Jul 2025</p>
+										<p class="text-gray-700 text-sm flex-grow">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध.</p>
+										<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-3">Read More &rarr;</a>
+									</div>
+								</div>
+							</div>
+							<!-- Writeup Card 4 -->
+							<div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 snap-start px-2">
+								<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+									<img src="https://picsum.photos/seed/food/400/300" alt="A colorful Maharashtrian thali with various dishes." class="w-full h-40 object-cover">
+									<div class="p-4 flex flex-col flex-grow">
+										<h3 class="font-bold text-lg">महाराष्ट्रातील खाद्यसंस्कृती</h3>
+										<p class="text-xs text-gray-500 mb-2">By A. Patil | 15 Aug 2025</p>
+										<p class="text-gray-700 text-sm flex-grow">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे...</p>
+										<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-4">Read More &rarr;</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Left Arrow -->
+						<button id="scroll-left-btn" aria-label="Scroll left" class="absolute top-1/2 left-0 -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition">
+							<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+						</button>
+						<!-- Right Arrow -->
+						<button id="scroll-right-btn" aria-label="Scroll right" class="absolute top-1/2 right-0 -translate-y-1/2 bg-white/50 hover:bg-white rounded-full p-2 transition">
+							<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+						</button>
+					</div>
+					 <div class="text-center mt-6">
+						<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="archive-page">View All Articles &rarr;</a>
+					</div>
+				</div>
 
-                <!-- Divider -->
-                <hr class="border-gray-200">
+				<!-- Divider -->
+				<hr class="border-gray-200">
 
-                <!-- Photo Gallery Section -->
-                <div id="gallery-section" class="p-4 md:p-8">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Gallery</h2>
-                    <div class="relative w-full overflow-hidden">
-                        <div id="gallery-scroll" class="flex animate-scroll">
-                            <!-- Images are duplicated for seamless loop -->
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/d09gZVjQ/nitin-pouniker-Kc6-Di9-Kh-Rm-U-unsplash.jpg" alt="A traditional Maharashtrian fort at sunset." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/1J8MZ3J1/sachin-tandale-QQl-WHeh-I0ts-unsplash.jpg" alt="A vibrant Lavani dancer in traditional attire." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/6R8STwKm/vitthal-god.jpg" alt="A black stone statue of Lord Vitthal." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ganesh/800/600" alt="A colorful celebration of the Ganesh Chaturthi Festival." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/kolhapuri/800/600" alt="Handcrafted leather Kolhapuri Chappals." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ajanta/800/600" alt="An ancient and intricate painting from the Ajanta Caves." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <!-- Second set of images -->
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/d09gZVjQ/nitin-pouniker-Kc6-Di9-Kh-Rm-U-unsplash.jpg" alt="A traditional Maharashtrian fort at sunset." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/1J8MZ3J1/sachin-tandale-QQl-WHeh-I0ts-unsplash.jpg" alt="A vibrant Lavani dancer in traditional attire." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/6R8STwKm/vitthal-god.jpg" alt="A black stone statue of Lord Vitthal." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ganesh/800/600" alt="A colorful celebration of the Ganesh Chaturthi Festival." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/kolhapuri/800/600" alt="Handcrafted leather Kolhapuri Chappals." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                            <div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ajanta/800/600" alt="An ancient and intricate painting from the Ajanta Caves." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
-                        </div>
-                    </div>
-                </div>
+				<!-- Photo Gallery Section -->
+				<div id="gallery-section" class="p-4 md:p-8">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Gallery</h2>
+					<div class="relative w-full overflow-hidden">
+						<div id="gallery-scroll" class="flex animate-scroll">
+							<!-- Images are duplicated for seamless loop -->
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/d09gZVjQ/nitin-pouniker-Kc6-Di9-Kh-Rm-U-unsplash.jpg" alt="A traditional Maharashtrian fort at sunset." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/1J8MZ3J1/sachin-tandale-QQl-WHeh-I0ts-unsplash.jpg" alt="A vibrant Lavani dancer in traditional attire." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/6R8STwKm/vitthal-god.jpg" alt="A black stone statue of Lord Vitthal." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ganesh/800/600" alt="A colorful celebration of the Ganesh Chaturthi Festival." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/kolhapuri/800/600" alt="Handcrafted leather Kolhapuri Chappals." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ajanta/800/600" alt="An ancient and intricate painting from the Ajanta Caves." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<!-- Second set of images -->
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/d09gZVjQ/nitin-pouniker-Kc6-Di9-Kh-Rm-U-unsplash.jpg" alt="A traditional Maharashtrian fort at sunset." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/1J8MZ3J1/sachin-tandale-QQl-WHeh-I0ts-unsplash.jpg" alt="A vibrant Lavani dancer in traditional attire." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://i.ibb.co/6R8STwKm/vitthal-god.jpg" alt="A black stone statue of Lord Vitthal." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ganesh/800/600" alt="A colorful celebration of the Ganesh Chaturthi Festival." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/kolhapuri/800/600" alt="Handcrafted leather Kolhapuri Chappals." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+							<div class="gallery-item flex-shrink-0 w-1/2 md:w-1/3 p-2"><img src="https://picsum.photos/seed/ajanta/800/600" alt="An ancient and intricate painting from the Ajanta Caves." loading="lazy" class="cursor-pointer rounded-lg shadow-md w-full h-64 object-cover"></div>
+						</div>
+					</div>
+				</div>
 
-                <!-- Newsletter Signup Section -->
-                <div class="bg-amber-600 p-8">
-                    <div class="max-w-xl mx-auto text-center">
-                        <h2 class="text-3xl font-bold text-white mb-2">Join Our Community</h2>
-                        <p class="text-amber-100 mb-6">Get the latest articles, cultural insights, and event news delivered right to your inbox.</p>
-                        <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2">
-                            <input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-400" required>
-                            <button type="submit" class="bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Subscribe</button>
-                        </form>
-                        <p id="newsletter-success-msg" class="text-white mt-4 hidden">Thank you for subscribing!</p>
-                    </div>
-                </div>
+				<!-- Newsletter Signup Section -->
+				<div class="bg-amber-600 p-8">
+					<div class="max-w-xl mx-auto text-center">
+						<h2 class="text-3xl font-bold text-white mb-2">Join Our Community</h2>
+						<p class="text-amber-100 mb-6">Get the latest articles, cultural insights, and event news delivered right to your inbox.</p>
+						<form id="newsletter-form" class="flex flex-col sm:flex-row gap-2">
+							<input type="email" placeholder="Enter your email" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-400" required>
+							<button type="submit" class="bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">Subscribe</button>
+						</form>
+						<p id="newsletter-success-msg" class="text-white mt-4 hidden">Thank you for subscribing!</p>
+					</div>
+				</div>
 
-                <!-- Footer -->
-                <footer class="bg-gray-800 text-gray-300 p-6 text-center">
-                    <div class="mb-4">
-                        <a href="#" id="contact-us-link" class="text-amber-400 hover:text-amber-300 transition-colors">Contact Us</a>
-                    </div>
-                    <div class="flex justify-center space-x-6 mb-4">
-                        <a href="#" aria-label="Facebook page" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
-                        <a href="#" aria-label="Twitter profile" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
-                        <a href="#" aria-label="Instagram profile" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.545c-1.04.048-1.67.21-2.147.41a3.402 3.402 0 00-1.232.82 3.402 3.402 0 00-.82 1.232c-.2.477-.362 1.106-.41 2.147-.048 1.02-.06 1.358-.06 3.655s.012 2.635.06 3.655c.048 1.04.21 1.67.41 2.147a3.402 3.402 0 00.82 1.232 3.402 3.402 0 001.232.82c.477.2.1.106.362.41 2.147.048 1.02.06 1.358.06 3.655s.012-2.635.06-3.655c.048-1.04.21-1.67.41-2.147a3.402 3.402 0 00.82-1.232 3.402 3.402 0 001.232-.82c.2-.477.362-1.106.41-2.147.048-1.02.06-1.358.06-3.655s-.012-2.635-.06-3.655c-.048-1.04-.21-1.67-.41-2.147a3.402 3.402 0 00-.82-1.232 3.402 3.402 0 00-1.232-.82c-.477-.2-1.106-.362-2.147-.41-1.02-.048-1.358-.06-3.655-.06s-2.635.012-3.655.06zm5.691 1.802a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" clip-rule="evenodd" /></svg></a>
-                    </div>
-                    <p class="text-sm">contact@buddhishahi.com</p>
-                    <p class="text-xs mt-2 text-gray-400">&copy; 2025 बुद्धिशाही! All Rights Reserved.</p>
-                </footer>
-            </div>
-        </div>
+				<!-- Footer -->
+				<footer class="bg-gray-800 text-gray-300 p-6 text-center">
+					<div class="mb-4">
+						<a href="#" id="contact-us-link" class="text-amber-400 hover:text-amber-300 transition-colors">Contact Us</a>
+					</div>
+					<div class="flex justify-center space-x-6 mb-4">
+						<a href="#" aria-label="Facebook page" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+						<a href="#" aria-label="Twitter profile" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+						<a href="#" aria-label="Instagram profile" class="hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.345 2.525c.636-.247 1.363-.416 2.427.465C9.793 2.013 10.147 2 12.315 2zm-1.161 1.545c-1.04.048-1.67.21-2.147.41a3.402 3.402 0 00-1.232.82 3.402 3.402 0 00-.82 1.232c-.2.477-.362 1.106-.41 2.147-.048 1.02-.06 1.358-.06 3.655s.012 2.635.06 3.655c.048 1.04.21 1.67.41 2.147a3.402 3.402 0 00.82 1.232 3.402 3.402 0 001.232.82c.477.2.1.106.362.41 2.147.048 1.02.06 1.358.06 3.655s.012-2.635.06-3.655c.048-1.04.21-1.67.41-2.147a3.402 3.402 0 00.82-1.232 3.402 3.402 0 001.232-.82c.2-.477.362-1.106.41-2.147.048-1.02.06-1.358.06-3.655s-.012-2.635-.06-3.655c-.048-1.04-.21-1.67-.41-2.147a3.402 3.402 0 00-.82-1.232 3.402 3.402 0 00-1.232-.82c-.477-.2-1.106-.362-2.147-.41-1.02-.048-1.358-.06-3.655-.06s-2.635.012-3.655.06zm5.691 1.802a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" clip-rule="evenodd" /></svg></a>
+					</div>
+					<p class="text-sm">contact@buddhishahi.com</p>
+					<p class="text-xs mt-2 text-gray-400">&copy; 2025 बुद्धिशाही! All Rights Reserved.</p>
+				</footer>
+			</div>
+		</div>
 
-        <!-- ================================================== -->
-        <!-- Article & Other Pages Content (Initially Hidden)   -->
-        <!-- ================================================== -->
+		<!-- ================================================== -->
+		<!-- Article & Other Pages Content (Initially Hidden)   -->
+		<!-- ================================================== -->
 
-        <!-- Article 1 -->
-        <div id="article-page-1" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 logo-font">बुद्धिशाही: एक ओळख</h1>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">मराठी भाषा ही केवळ संवादाचं माध्यम नाही, तर आपल्या इतिहासाची, परंपरांची आणि विचारांची शिदोरी आहे. संत साहित्यापासून आधुनिक साहित्यापर्यंत, लावणीपासून लोकगीतांपर्यंत, मराठीने आपल्याला असंख्य सांस्कृतिक रत्न दिली आहेत. तिच्या प्रत्येक शब्दात भाव, प्रत्येक वाक्यात ज्ञान, आणि प्रत्येक गाण्यात परंपरेची गोडी आहे.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">आपली संस्कृती हजारो वर्षांच्या परंपरेतून तयार झालेली आहे — यात ज्ञान, तत्त्वज्ञान, कला, साहित्य, लोकजीवन, तसेच समाजातला परस्पर सन्मान यांचा सुंदर मेळ आहे. हीच संस्कृती आपल्याला एकमेकांशी जोडते, आपली ओळख जपते आणि पुढील पिढ्यांना विचारांचा वारसा देते.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">याच विचारातून "बुद्धिशाही" ही वेबसाइट सुरू करण्यात आली आहे. येथे तुम्हाला भाषेची गोडी, सांस्कृतिक वारसा, ऐतिहासिक व्यक्तिमत्त्वे, तत्त्वज्ञान आणि समाजातील महत्त्वाचे विषय याबाबत सखोल आणि सोप्या भाषेत माहिती मिळेल.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">"बुद्धिशाही" चं उद्दिष्ट केवळ माहिती देणं नाही, तर विचारांना चालना देणं आहे — जेणेकरून लोकांना आपल्या संस्कृतीबद्दल अभिमान वाटेल, आणि तिला पुढे नेण्याची प्रेरणा मिळेल.</p>
-                <p class="text-lg text-gray-700 leading-relaxed font-semibold">"बुद्धिशाही" — कारण भाषा आणि संस्कृती ही केवळ भूतकाळाची गोष्ट नाही, ती भविष्याचा पाया आहे.</p>
-            </div>
-        </div>
+		<!-- Article 1 -->
+		<div id="article-page-1" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 logo-font">बुद्धिशाही: एक ओळख</h1>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">मराठी भाषा ही केवळ संवादाचं माध्यम नाही, तर आपल्या इतिहासाची, परंपरांची आणि विचारांची शिदोरी आहे. संत साहित्यापासून आधुनिक साहित्यापर्यंत, लावणीपासून लोकगीतांपर्यंत, मराठीने आपल्याला असंख्य सांस्कृतिक रत्न दिली आहेत. तिच्या प्रत्येक शब्दात भाव, प्रत्येक वाक्यात ज्ञान, आणि प्रत्येक गाण्यात परंपरेची गोडी आहे.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">आपली संस्कृती हजारो वर्षांच्या परंपरेतून तयार झालेली आहे — यात ज्ञान, तत्त्वज्ञान, कला, साहित्य, लोकजीवन, तसेच समाजातला परस्पर सन्मान यांचा सुंदर मेळ आहे. हीच संस्कृती आपल्याला एकमेकांशी जोडते, आपली ओळख जपते आणि पुढील पिढ्यांना विचारांचा वारसा देते.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">याच विचारातून "बुद्धिशाही" ही वेबसाइट सुरू करण्यात आली आहे. येथे तुम्हाला भाषेची गोडी, सांस्कृतिक वारसा, ऐतिहासिक व्यक्तिमत्त्वे, तत्त्वज्ञान आणि समाजातील महत्त्वाचे विषय याबाबत सखोल आणि सोप्या भाषेत माहिती मिळेल.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">"बुद्धिशाही" चं उद्दिष्ट केवळ माहिती देणं नाही, तर विचारांना चालना देणं आहे — जेणेकरून लोकांना आपल्या संस्कृतीबद्दल अभिमान वाटेल, आणि तिला पुढे नेण्याची प्रेरणा मिळेल.</p>
+				<p class="text-lg text-gray-700 leading-relaxed font-semibold">"बुद्धिशाही" — कारण भाषा आणि संस्कृती ही केवळ भूतकाळाची गोष्ट नाही, ती भविष्याचा पाया आहे.</p>
+			</div>
+		</div>
 
-        <!-- Article 2 -->
-        <div id="article-page-2" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">मराठी रंगभूमीचा प्रवास</h1>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा. मराठी रंगभूमीने नेहमीच समाजाला आरसा दाखवला आहे आणि मनोरंजनासोबतच वैचारिक मंथनही घडवले आहे.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">विष्णूदास भावे यांच्या "सीता स्वयंवर" पासून सुरू झालेला हा प्रवास आज अनेक वळणांवरून पुढे जात आहे. अण्णासाहेब किर्लोस्कर, काकासाहेब खाडिलकर, आणि राम गणेश गडकरी यांच्यासारख्या दिग्गजांनी या रंगभूमीला समृद्ध केले.</p>
-            </div>
-        </div>
+		<!-- Article 2 -->
+		<div id="article-page-2" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">मराठी रंगभूमीचा प्रवास</h1>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा. मराठी रंगभूमीने नेहमीच समाजाला आरसा दाखवला आहे आणि मनोरंजनासोबतच वैचारिक मंथनही घडवले आहे.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">विष्णूदास भावे यांच्या "सीता स्वयंवर" पासून सुरू झालेला हा प्रवास आज अनेक वळणांवरून पुढे जात आहे. अण्णासाहेब किर्लोस्कर, काकासाहेब खाडिलकर, आणि राम गणेश गडकरी यांच्यासारख्या दिग्गजांनी या रंगभूमीला समृद्ध केले.</p>
+			</div>
+		</div>
 
-        <!-- Article 3 -->
-        <div id="article-page-3" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">वारली चित्रकला: एक प्राचीन कला</h1>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध. ही कला केवळ भिंतींवरची नक्षी नाही, तर निसर्ग आणि मानवी जीवनाचा उत्सव आहे.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">या चित्रांमध्ये वापरले जाणारे त्रिकोण, वर्तुळ आणि चौरस हे मूलभूत आकार निसर्गातील पर्वत, चंद्र, सूर्य आणि जमीन यांचे प्रतीक आहेत. ही चित्रे त्यांच्या दैनढिन जीवनातील प्रसंग, सण, आणि लग्न समारंभ दर्शवतात.</p>
-            </div>
-        </div>
+		<!-- Article 3 -->
+		<div id="article-page-3" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">वारली चित्रकला: एक प्राचीन कला</h1>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध. ही कला केवळ भिंतींवरची नक्षी नाही, तर निसर्ग आणि मानवी जीवनाचा उत्सव आहे.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">या चित्रांमध्ये वापरले जाणारे त्रिकोण, वर्तुळ आणि चौरस हे मूलभूत आकार निसर्गातील पर्वत, चंद्र, सूर्य आणि जमीन यांचे प्रतीक आहेत. ही चित्रे त्यांच्या दैनढिन जीवनातील प्रसंग, सण, आणि लग्न समारंभ दर्शवतात.</p>
+			</div>
+		</div>
 
-        <!-- Article 4 -->
-        <div id="article-page-4" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">महाराष्ट्रातील खाद्यसंस्कृती</h1>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे. प्रत्येक प्रदेशाची स्वतःची अशी खास ओळख आहे.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">कोकणातील मसालेदार मासे आणि सोलकढी, घाटावरची झणझणीत मिसळ, किंवा विदर्भातील सावजी मटण — प्रत्येक पदार्थात तिथल्या मातीचा सुगंध आणि परंपरेची चव आहे. हे पदार्थ केवळ पोटच भरत नाहीत, तर आपली संस्कृती आणि पाहुणचार जपतात.</p>
-            </div>
-        </div>
-        
-        <!-- Article 5 (Featured Personality) -->
-        <div id="article-page-5" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">पु. ल. देशपांडे</h1>
-                <p class="text-lg text-gray-500 mb-6">Maharashtra's Beloved Treasure</p>
-                <img src="https://i.ibb.co/fw4nKbN/pp.jpg" alt="A smiling Pu La Deshpande in a black and white photograph." class="rounded-lg shadow-md w-full h-auto object-contain mb-6" style="max-height: 50vh;">
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">Purushottam Laxman Deshpande (1919-2000), affectionately known as Pu La, was more than just a writer; he was an institution. A masterful humorist, musician, composer, actor, and orator, he touched the hearts of millions of Maharashtrians. His literature, filled with witty observations of everyday life, created characters that feel like family to this day.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">From the delightful travelogues in "Apurvai" to the unforgettable characters in "Batatyachi Chal" and "Vyakti aani Valli," Pu La's work is a celebration of the ordinary. He had an unparalleled ability to find humor in the mundane and present it with a warmth that continues to resonate with readers of all ages. His legacy is not just in his books and music, but in the laughter and joy he brought into the world.</p>
-            </div>
-        </div>
-        
-        <!-- Article 6 (Book of the Month) -->
-        <div id="article-page-6" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">ययाति</h1>
-                <p class="text-lg text-gray-500 mb-6">By V. S. Khandekar</p>
-                <img src="https://i.ibb.co/tVmNwzq/yayati.jpg" alt="The book cover of 'Yayati', showing a classical Indian painting style." class="rounded-lg shadow-md w-full max-w-sm mx-auto h-auto object-cover mb-6">
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">"Yayati" is a 1959 Marathi-language mythological novel by Indian writer V. S. Khandekar. One of Khandekar's best-known works, it retells the story of the mythical Hindu king Yayati from the Mahabharata. The novel's narrative is a philosophical exploration of the conflict between duty and desire.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">The book won two prestigious awards: a Sahitya Akademi Award in 1960 and a Jnanpith Award in 1974. It is a timeless classic that continues to be celebrated for its profound themes and masterful storytelling.</p>
-            </div>
-        </div>
+		<!-- Article 4 -->
+		<div id="article-page-4" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">महाराष्ट्रातील खाद्यसंस्कृती</h1>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे. प्रत्येक प्रदेशाची स्वतःची अशी खास ओळख आहे.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">कोकणातील मसालेदार मासे आणि सोलकढी, घाटावरची झणझणीत मिसळ, किंवा विदर्भातील सावजी मटण — प्रत्येक पदार्थात तिथल्या मातीचा सुगंध आणि परंपरेची चव आहे. हे पदार्थ केवळ पोटच भरत नाहीत, तर आपली संस्कृती आणि पाहुणचार जपतात.</p>
+			</div>
+		</div>
+		
+		<!-- Article 5 (Featured Personality) -->
+		<div id="article-page-5" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">पु. ल. देशपांडे</h1>
+				<p class="text-lg text-gray-500 mb-6">Maharashtra's Beloved Treasure</p>
+				<img src="https://i.ibb.co/fw4nKbN/pp.jpg" alt="A smiling Pu La Deshpande in a black and white photograph." class="rounded-lg shadow-md w-full h-auto object-contain mb-6" style="max-height: 50vh;">
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">Purushottam Laxman Deshpande (1919-2000), affectionately known as Pu La, was more than just a writer; he was an institution. A masterful humorist, musician, composer, actor, and orator, he touched the hearts of millions of Maharashtrians. His literature, filled with witty observations of everyday life, created characters that feel like family to this day.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">From the delightful travelogues in "Apurvai" to the unforgettable characters in "Batatyachi Chal" and "Vyakti aani Valli," Pu La's work is a celebration of the ordinary. He had an unparalleled ability to find humor in the mundane and present it with a warmth that continues to resonate with readers of all ages. His legacy is not just in his books and music, but in the laughter and joy he brought into the world.</p>
+			</div>
+		</div>
+		
+		<!-- Article 6 (Book of the Month) -->
+		<div id="article-page-6" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">ययाति</h1>
+				<p class="text-lg text-gray-500 mb-6">By V. S. Khandekar</p>
+				<img src="https://i.ibb.co/tVmNwzq/yayati.jpg" alt="The book cover of 'Yayati', showing a classical Indian painting style." class="rounded-lg shadow-md w-full max-w-sm mx-auto h-auto object-cover mb-6">
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">"Yayati" is a 1959 Marathi-language mythological novel by Indian writer V. S. Khandekar. One of Khandekar's best-known works, it retells the story of the mythical Hindu king Yayati from the Mahabharata. The novel's narrative is a philosophical exploration of the conflict between duty and desire.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">The book won two prestigious awards: a Sahitya Akademi Award in 1960 and a Jnanpith Award in 1974. It is a timeless classic that continues to be celebrated for its profound themes and masterful storytelling.</p>
+			</div>
+		</div>
 
-        <!-- Contact Page -->
-        <div id="contact-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Contact Us</h1>
-                <p class="text-lg text-gray-700 leading-relaxed mb-8">We'd love to hear from you. Whether you have a question, feedback, or a collaboration idea, please feel free to reach out.</p>
-                <form id="contact-form">
-                    <div id="contact-form-inputs">
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Your Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Your Email</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required>
-                        </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="bg-green-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">Send Message</button>
-                        </div>
-                    </div>
-                     <p id="contact-success-msg" class="text-center text-lg text-green-700 mt-4 hidden">Your message has been sent. Thank you!</p>
-                </form>
-            </div>
-        </div>
+		<!-- Contact Page -->
+		<div id="contact-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Contact Us</h1>
+				<p class="text-lg text-gray-700 leading-relaxed mb-8">We'd love to hear from you. Whether you have a question, feedback, or a collaboration idea, please feel free to reach out.</p>
+				<form id="contact-form">
+					<div id="contact-form-inputs">
+						<div class="mb-4">
+							<label for="name" class="block text-gray-700 text-sm font-bold mb-2">Your Name</label>
+							<input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+						</div>
+						<div class="mb-4">
+							<label for="email" class="block text-gray-700 text-sm font-bold mb-2">Your Email</label>
+							<input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+						</div>
+						<div class="mb-6">
+							<label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+							<textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400" required></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="bg-green-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">Send Message</button>
+						</div>
+					</div>
+					 <p id="contact-success-msg" class="text-center text-lg text-green-700 mt-4 hidden">Your message has been sent. Thank you!</p>
+				</form>
+			</div>
+		</div>
 
-        <!-- Writeups Archive Page -->
-        <div id="archive-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-4xl mx-auto overflow-hidden pt-20">
-             <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-8">All Writeups</h1>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
-                     <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                        <img src="https://picsum.photos/seed/writeup1/400/300" alt="An open book with a warm light." class="w-full h-40 object-cover">
-                        <div class="p-4 flex flex-col flex-grow">
-                            <h3 class="font-bold text-lg logo-font">बुद्धिशाही: एक ओळख</h3>
-                            <p class="text-xs text-gray-500 mb-2">By Team बुद्धिशाही | 09 Aug 2025</p>
-                            <p class="text-gray-700 text-sm flex-grow">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा...</p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-1">Read More &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Card 2 -->
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                        <img src="https://picsum.photos/seed/writeup2/400/300" alt="A classic Marathi book on a wooden table." class="w-full h-40 object-cover">
-                        <div class="p-4 flex flex-col flex-grow">
-                            <h3 class="font-bold text-lg">मराठी रंगभूमीचा प्रवास</h3>
-                            <p class="text-xs text-gray-500 mb-2">By P. Deshpande | 02 Aug 2025</p>
-                            <p class="text-gray-700 text-sm flex-grow">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा.</p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-2">Read More &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                        <img src="https://picsum.photos/seed/writeup3/400/300" alt="A close-up of a traditional Warli painting." class="w-full h-40 object-cover">
-                        <div class="p-4 flex flex-col flex-grow">
-                            <h3 class="font-bold text-lg">वारली चित्रकला: एक प्राचीन कला</h3>
-                            <p class="text-xs text-gray-500 mb-2">By S. Kulkarni | 28 Jul 2025</p>
-                            <p class="text-gray-700 text-sm flex-grow">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध.</p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-3">Read More &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-                        <img src="https://picsum.photos/seed/food/400/300" alt="A colorful Maharashtrian thali with various dishes." class="w-full h-40 object-cover">
-                        <div class="p-4 flex flex-col flex-grow">
-                            <h3 class="font-bold text-lg">महाराष्ट्रातील खाद्यसंस्कृती</h3>
-                            <p class="text-xs text-gray-500 mb-2">By A. Patil | 15 Aug 2025</p>
-                            <p class="text-gray-700 text-sm flex-grow">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे...</p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-4">Read More &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Poetry Corner Page -->
-        <div id="poetry-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-4xl mx-auto overflow-hidden pt-20">
-            <header class="relative h-64 rounded-t-lg bg-cover bg-center" style="background-image: url('https://i.ibb.co/84bL42yr/20250818-0316-Nostalgic-Floral-Letter-simple-compose-01k2wzw58vehe8rma8zxxhy4vw.png');">
-                <div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-lg"></div>
-                <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
-                    <h1 class="text-5xl font-bold artistic-font">कविता मंच (Poetry Corner)</h1>
-                    <a href="#" class="back-to-home-btn text-amber-300 hover:text-amber-100 font-semibold mt-4">&larr; Back to Home</a>
-                </div>
-            </header>
-            <div class="p-8 md:p-12">
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Featured Poems</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                            <h3 class="text-2xl font-bold logo-font mb-2">पसायदान</h3>
-                            <p class="text-md text-gray-500 mb-4">संत ज्ञानेश्वर</p>
-                            <p class="text-lg leading-loose">आता विश्वात्मकें देवें । येणे वाग्यज्ञें तोषावें ।<br>
-                            तोषोनिं मज ज्ञानावें । पसायदान हें ॥</p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                            <h3 class="font-bold text-xl logo-font">मृत्युंजय</h3>
-                            <p class="text-sm text-gray-500 mb-2">July 2025</p>
-                            <a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-8">Learn More &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Article 7 (Ahilyabai Holkar) -->
-        <div id="article-page-7" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">अहिल्याबाई होळकर</h1>
-                <p class="text-lg text-gray-500 mb-6">The Philosopher Queen</p>
-                <img src="https://picsum.photos/seed/ahilyabai/800/600" alt="A painting of the historical queen, Ahilyabai Holkar." class="rounded-lg shadow-md w-full h-64 object-cover mb-6">
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">Ahilyabai Holkar (1725-1795) was the hereditary noble queen of the Maratha Empire, India. She is remembered as one of the most visionary and effective female rulers in Indian history. After the death of her husband and father-in-law, she took the reins of the kingdom and ruled with wisdom, courage, and an unwavering commitment to her people.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">Her reign is often cited as a golden age. She was a great pioneer and builder of Hindu temples, constructing hundreds of temples and dharamshalas (free lodging) across India. Her legacy is one of peace, prosperity, and piety.</p>
-            </div>
-        </div>
-        
-        <!-- Article 8 (Mrityunjay) -->
-        <div id="article-page-8" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
-            <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
-            <div class="p-8 md:p-12">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">मृत्युंजय</h1>
-                <p class="text-lg text-gray-500 mb-6">By Shivaji Sawant</p>
-                <img src="https://picsum.photos/seed/mrityunjay/800/1200" alt="The book cover of 'Mrityunjay' by Shivaji Sawant." class="rounded-lg shadow-md w-full max-w-sm mx-auto h-auto object-cover mb-6">
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">"Mrityunjay" is a celebrated Marathi novel by Shivaji Sawant, which presents the story of Karna, one of the most tragic heroes of the epic Mahabharata. The novel is a deep dive into the life and struggles of Karna, told from his perspective.</p>
-                <p class="text-lg text-gray-700 leading-relaxed mb-4">It beautifully captures his internal conflicts, his unwavering loyalty, and his tragic destiny. The book has been translated into several languages and is considered a masterpiece of modern Indian literature for its profound character study and emotional depth.</p>
-            </div>
-        </div>
-        
-    </div>
+		<!-- Writeups Archive Page -->
+		<div id="archive-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-4xl mx-auto overflow-hidden pt-20">
+			 <header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-8">All Writeups</h1>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<!-- Card 1 -->
+					 <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+						<img src="https://picsum.photos/seed/writeup1/400/300" alt="An open book with a warm light." class="w-full h-40 object-cover">
+						<div class="p-4 flex flex-col flex-grow">
+							<h3 class="font-bold text-lg logo-font">बुद्धिशाही: एक ओळख</h3>
+							<p class="text-xs text-gray-500 mb-2">By Team बुद्धिशाही | 09 Aug 2025</p>
+							<p class="text-gray-700 text-sm flex-grow">बुद्धिशाही — विचारांचा प्रकाश, संस्कृतीचा श्वास, संगम भाषा आणि संस्कृतीचा...</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-1">Read More &rarr;</a>
+						</div>
+					</div>
+					<!-- Card 2 -->
+					<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+						<img src="https://picsum.photos/seed/writeup2/400/300" alt="A classic Marathi book on a wooden table." class="w-full h-40 object-cover">
+						<div class="p-4 flex flex-col flex-grow">
+							<h3 class="font-bold text-lg">मराठी रंगभूमीचा प्रवास</h3>
+							<p class="text-xs text-gray-500 mb-2">By P. Deshpande | 02 Aug 2025</p>
+							<p class="text-gray-700 text-sm flex-grow">संगीत नाटकापासून ते आधुनिक प्रायोगिक नाटकांपर्यंत, मराठी रंगमंचाच्या प्रवासाचा आढावा.</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-2">Read More &rarr;</a>
+						</div>
+					</div>
+					<!-- Card 3 -->
+					<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+						<img src="https://picsum.photos/seed/writeup3/400/300" alt="A close-up of a traditional Warli painting." class="w-full h-40 object-cover">
+						<div class="p-4 flex flex-col flex-grow">
+							<h3 class="font-bold text-lg">वारली चित्रकला: एक प्राचीन कला</h3>
+							<p class="text-xs text-gray-500 mb-2">By S. Kulkarni | 28 Jul 2025</p>
+							<p class="text-gray-700 text-sm flex-grow">वारली जमातीच्या पारंपारिक कलेमागील साधे सौंदर्य आणि सखोल कथांचा शोध.</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-3">Read More &rarr;</a>
+						</div>
+					</div>
+					<!-- Card 4 -->
+					<div class="bg-gray-50 rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+						<img src="https://picsum.photos/seed/food/400/300" alt="A colorful Maharashtrian thali with various dishes." class="w-full h-40 object-cover">
+						<div class="p-4 flex flex-col flex-grow">
+							<h3 class="font-bold text-lg">महाराष्ट्रातील खाद्यसंस्कृती</h3>
+							<p class="text-xs text-gray-500 mb-2">By A. Patil | 15 Aug 2025</p>
+							<p class="text-gray-700 text-sm flex-grow">पुरणपोळीपासून ते वडापावपर्यंत, महाराष्ट्राची खाद्यसंस्कृती चवींची एक अनोखी जत्रा आहे...</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold mt-4 self-start" data-article="article-page-4">Read More &rarr;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Poetry Corner Page -->
+		<div id="poetry-page" class="article-page hidden bg-white rounded-lg shadow-lg max-w-4xl mx-auto overflow-hidden pt-20">
+			<header class="relative h-64 rounded-t-lg bg-cover bg-center" style="background-image: url('https://i.ibb.co/84bL42yr/20250818-0316-Nostalgic-Floral-Letter-simple-compose-01k2wzw58vehe8rma8zxxhy4vw.png');">
+				<div class="absolute inset-0 bg-black bg-opacity-60 rounded-t-lg"></div>
+				<div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
+					<h1 class="text-5xl font-bold artistic-font">कविता मंच (Poetry Corner)</h1>
+					<a href="#" class="back-to-home-btn text-amber-300 hover:text-amber-100 font-semibold mt-4">&larr; Back to Home</a>
+				</div>
+			</header>
+			<div class="p-8 md:p-12">
+				<div class="mb-12">
+					<h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Featured Poems</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div class="bg-gray-50 p-6 rounded-lg shadow-md">
+							<h3 class="text-2xl font-bold logo-font mb-2">पसायदान</h3>
+							<p class="text-md text-gray-500 mb-4">संत ज्ञानेश्वर</p>
+							<p class="text-lg leading-loose">आता विश्वात्मकें देवें । येणे वाग्यज्ञें तोषावें ।<br>
+							तोषोनिं मज ज्ञानावें । पसायदान हें ॥</p>
+						</div>
+						<div class="bg-gray-50 p-6 rounded-lg shadow-md">
+							<h3 class="font-bold text-xl logo-font">मृत्युंजय</h3>
+							<p class="text-sm text-gray-500 mb-2">July 2025</p>
+							<a href="#" class="read-more-btn text-amber-600 hover:text-amber-800 font-semibold" data-article="article-page-8">Learn More &rarr;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Article 7 (Ahilyabai Holkar) -->
+		<div id="article-page-7" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">अहिल्याबाई होळकर</h1>
+				<p class="text-lg text-gray-500 mb-6">The Philosopher Queen</p>
+				<img src="https://picsum.photos/seed/ahilyabai/800/600" alt="A painting of the historical queen, Ahilyabai Holkar." class="rounded-lg shadow-md w-full h-64 object-cover mb-6">
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">Ahilyabai Holkar (1725-1795) was the hereditary noble queen of the Maratha Empire, India. She is remembered as one of the most visionary and effective female rulers in Indian history. After the death of her husband and father-in-law, she took the reins of the kingdom and ruled with wisdom, courage, and an unwavering commitment to her people.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">Her reign is often cited as a golden age. She was a great pioneer and builder of Hindu temples, constructing hundreds of temples and dharamshalas (free lodging) across India. Her legacy is one of peace, prosperity, and piety.</p>
+			</div>
+		</div>
+		
+		<!-- Article 8 (Mrityunjay) -->
+		<div id="article-page-8" class="article-page hidden bg-white rounded-lg shadow-lg max-w-3xl mx-auto overflow-hidden pt-20">
+			<header class="p-4 border-b"><a href="#" class="back-to-home-btn text-amber-600 hover:text-amber-800 font-semibold">&larr; Back to Home</a></header>
+			<div class="p-8 md:p-12">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 logo-font">मृत्युंजय</h1>
+				<p class="text-lg text-gray-500 mb-6">By Shivaji Sawant</p>
+				<img src="https://picsum.photos/seed/mrityunjay/800/1200" alt="The book cover of 'Mrityunjay' by Shivaji Sawant." class="rounded-lg shadow-md w-full max-w-sm mx-auto h-auto object-cover mb-6">
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">"Mrityunjay" is a celebrated Marathi novel by Shivaji Sawant, which presents the story of Karna, one of the most tragic heroes of the epic Mahabharata. The novel is a deep dive into the life and struggles of Karna, told from his perspective.</p>
+				<p class="text-lg text-gray-700 leading-relaxed mb-4">It beautifully captures his internal conflicts, his unwavering loyalty, and his tragic destiny. The book has been translated into several languages and is considered a masterpiece of modern Indian literature for its profound character study and emotional depth.</p>
+			</div>
+		</div>
+		
+	</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.getElementById('main-header');
-            const homePage = document.getElementById('home-page');
-            const articlePages = document.querySelectorAll('.article-page');
-            const writeupsContainer = document.getElementById('writeups-container');
-            const lightbox = document.getElementById('lightbox');
-            const heroTitle = document.querySelector('.animated-heading');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
-            
-            // --- Single-Page App Navigation ---
-            function hideAllPages() {
-                homePage.classList.add('hidden');
-                articlePages.forEach(page => page.classList.add('hidden'));
-            }
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const header = document.getElementById('main-header');
+			const homePage = document.getElementById('home-page');
+			const articlePages = document.querySelectorAll('.article-page');
+			const writeupsContainer = document.getElementById('writeups-container');
+			const lightbox = document.getElementById('lightbox');
+			const heroTitle = document.querySelector('.animated-heading');
+			const mobileMenu = document.getElementById('mobile-menu');
+			const mobileMenuButton = document.getElementById('mobile-menu-button');
+			const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+			
+			// --- Single-Page App Navigation ---
+			function hideAllPages() {
+				homePage.classList.add('hidden');
+				articlePages.forEach(page => page.classList.add('hidden'));
+			}
 
-            function showPage(pageId) {
-                hideAllPages();
-                mobileMenu.classList.add('hidden');
-                const pageToShow = document.getElementById(pageId);
-                if (pageToShow) {
-                    pageToShow.classList.remove('hidden');
-                    header.classList.add('bg-white', 'shadow-md', 'text-gray-800');
-                    header.classList.remove('text-white');
-                    window.scrollTo(0, 0);
-                }
-            }
+			function showPage(pageId) {
+				hideAllPages();
+				mobileMenu.classList.add('hidden');
+				const pageToShow = document.getElementById(pageId);
+				if (pageToShow) {
+					pageToShow.classList.remove('hidden');
+					header.classList.add('bg-white', 'shadow-md', 'text-gray-800');
+					header.classList.remove('text-white');
+					window.scrollTo(0, 0);
+				}
+			}
 
-            function showHome() {
-                hideAllPages();
-                mobileMenu.classList.add('hidden');
-                homePage.classList.remove('hidden');
-                window.dispatchEvent(new Event('scroll'));
-                window.scrollTo(0, 0);
-            }
+			function showHome() {
+				hideAllPages();
+				mobileMenu.classList.add('hidden');
+				homePage.classList.remove('hidden');
+				window.dispatchEvent(new Event('scroll'));
+				window.scrollTo(0, 0);
+			}
 
-            // --- Event Delegation for Clicks ---
-            document.addEventListener('click', (event) => {
-                const target = event.target.closest('a, button');
-                if (!target) return;
+			// --- Event Delegation for Clicks ---
+			document.addEventListener('click', (event) => {
+				const target = event.target.closest('a, button');
+				if (!target) return;
 
-                // Mobile Menu controls
-                if(target.id === 'mobile-menu-button') return mobileMenu.classList.remove('hidden');
-                if(target.id === 'mobile-menu-close-button') return mobileMenu.classList.add('hidden');
+				// Mobile Menu controls
+				if(target.id === 'mobile-menu-button') return mobileMenu.classList.remove('hidden');
+				if(target.id === 'mobile-menu-close-button') return mobileMenu.classList.add('hidden');
 
-                // Navigation Links
-                if (target.matches('.nav-link') || target.id === 'home-link' || target.matches('.read-more-btn') || target.matches('.back-to-home-btn') || target.id === 'contact-us-link' || target.matches('.nav-link-mobile')) {
-                    event.preventDefault();
-                    if (target.id === 'poetry-link-nav' || target.id === 'poetry-link-nav-mobile') return showPage('poetry-page');
-                    if (target.id === 'contact-link-nav' || target.id === 'contact-us-link' || target.id === 'contact-link-nav-mobile') return showPage('contact-page');
-                    if (target.matches('.read-more-btn')) return showPage(target.dataset.article);
-                    
-                    showHome();
-                    const href = target.getAttribute('href');
-                    if (href && href.startsWith('#') && href.length > 1) {
-                        setTimeout(() => {
-                            const targetElement = document.querySelector(href);
-                            if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
-                        }, 100);
-                    }
-                    return;
-                }
+				// Navigation Links
+				if (target.matches('.nav-link') || target.id === 'home-link' || target.matches('.read-more-btn') || target.matches('.back-to-home-btn') || target.id === 'contact-us-link' || target.matches('.nav-link-mobile')) {
+					event.preventDefault();
+					if (target.id === 'poetry-link-nav' || target.id === 'poetry-link-nav-mobile') return showPage('poetry-page');
+					if (target.id === 'contact-link-nav' || target.id === 'contact-us-link' || target.id === 'contact-link-nav-mobile') return showPage('contact-page');
+					if (target.matches('.read-more-btn')) return showPage(target.dataset.article);
+					
+					showHome();
+					const href = target.getAttribute('href');
+					if (href && href.startsWith('#') && href.length > 1) {
+						setTimeout(() => {
+							const targetElement = document.querySelector(href);
+							if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth' });
+						}, 100);
+					}
+					return;
+				}
 
-                // Slider Controls
-                if (target.id === 'scroll-left-btn') {
-                    const scrollAmount = writeupsContainer.querySelector('div').clientWidth;
-                    writeupsContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                    return;
-                }
-                if (target.id === 'scroll-right-btn') {
-                    const scrollAmount = writeupsContainer.querySelector('div').clientWidth;
-                    writeupsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                    return;
-                }
+				// Slider Controls
+				if (target.id === 'scroll-left-btn') {
+					const scrollAmount = writeupsContainer.querySelector('div').clientWidth;
+					writeupsContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+					return;
+				}
+				if (target.id === 'scroll-right-btn') {
+					const scrollAmount = writeupsContainer.querySelector('div').clientWidth;
+					writeupsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+					return;
+				}
 
-                // Lightbox Controls
-                if (target.closest('.gallery-item')) {
-                    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
-                    const itemIndex = galleryItems.indexOf(target.closest('.gallery-item'));
-                    showLightbox(itemIndex);
-                    return;
-                }
-                if (target.id === 'lightbox-close') return closeLightbox();
-                if (target.id === 'lightbox-next') return showNextImage();
-                if (target.id === 'lightbox-prev') return showPrevImage();
-            });
-            
-            // --- Form Submissions ---
-            document.addEventListener('submit', (event) => {
-                // A real implementation would send this data to a server.
-                // For now, we'll just show a success message.
-                event.preventDefault();
-                const form = event.target;
-                
-                let isValid = true;
-                form.querySelectorAll('[required]').forEach(input => {
-                    if (!input.value) {
-                        isValid = false;
-                        const errorId = input.id + '-error';
-                        let errorEl = document.getElementById(errorId);
-                        if (!errorEl) {
-                            errorEl = document.createElement('p');
-                            errorEl.id = errorId;
-                            errorEl.className = 'form-error';
-                            input.parentNode.appendChild(errorEl);
-                        }
-                        errorEl.textContent = 'This field is required.';
-                    } else {
-                         const errorId = input.id + '-error';
-                         let errorEl = document.getElementById(errorId);
-                         if(errorEl) errorEl.textContent = '';
-                    }
-                });
+				// Lightbox Controls
+				if (target.closest('.gallery-item')) {
+					const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+					const itemIndex = galleryItems.indexOf(target.closest('.gallery-item'));
+					showLightbox(itemIndex);
+					return;
+				}
+				if (target.id === 'lightbox-close') return closeLightbox();
+				if (target.id === 'lightbox-next') return showNextImage();
+				if (target.id === 'lightbox-prev') return showPrevImage();
+			});
+			
+			// --- Form Submissions ---
+			document.addEventListener('submit', (event) => {
+				// A real implementation would send this data to a server.
+				// For now, we'll just show a success message.
+				event.preventDefault();
+				const form = event.target;
+				
+				let isValid = true;
+				form.querySelectorAll('[required]').forEach(input => {
+					if (!input.value) {
+						isValid = false;
+						const errorId = input.id + '-error';
+						let errorEl = document.getElementById(errorId);
+						if (!errorEl) {
+							errorEl = document.createElement('p');
+							errorEl.id = errorId;
+							errorEl.className = 'form-error';
+							input.parentNode.appendChild(errorEl);
+						}
+						errorEl.textContent = 'This field is required.';
+					} else {
+						 const errorId = input.id + '-error';
+						 let errorEl = document.getElementById(errorId);
+						 if(errorEl) errorEl.textContent = '';
+					}
+				});
 
-                if(!isValid) return;
+				if(!isValid) return;
 
-                if (form.id === 'newsletter-form') {
-                    form.classList.add('hidden');
-                    document.getElementById('newsletter-success-msg').classList.remove('hidden');
-                } else if (form.id === 'contact-form') {
-                    document.getElementById('contact-form-inputs').classList.add('hidden');
-                    document.getElementById('contact-success-msg').classList.remove('hidden');
-                } else if (form.id === 'poetry-form') {
-                    document.getElementById('poetry-form-inputs').classList.add('hidden');
-                    document.getElementById('poetry-success-msg').classList.remove('hidden');
-                }
-            });
+				if (form.id === 'newsletter-form') {
+					form.classList.add('hidden');
+					document.getElementById('newsletter-success-msg').classList.remove('hidden');
+				} else if (form.id === 'contact-form') {
+					document.getElementById('contact-form-inputs').classList.add('hidden');
+					document.getElementById('contact-success-msg').classList.remove('hidden');
+				} else if (form.id === 'poetry-form') {
+					document.getElementById('poetry-form-inputs').classList.add('hidden');
+					document.getElementById('poetry-success-msg').classList.remove('hidden');
+				}
+			});
 
-            // --- Header Scroll Effect ---
-            window.addEventListener('scroll', () => {
-                if (homePage.classList.contains('hidden')) return;
-                header.classList.toggle('bg-white', window.scrollY > 50);
-                header.classList.toggle('shadow-md', window.scrollY > 50);
-                header.classList.toggle('text-gray-800', window.scrollY > 50);
-                header.classList.toggle('text-white', window.scrollY <= 50);
-            });
+			// --- Header Scroll Effect ---
+			window.addEventListener('scroll', () => {
+				if (homePage.classList.contains('hidden')) return;
+				header.classList.toggle('bg-white', window.scrollY > 50);
+				header.classList.toggle('shadow-md', window.scrollY > 50);
+				header.classList.toggle('text-gray-800', window.scrollY > 50);
+				header.classList.toggle('text-white', window.scrollY <= 50);
+			});
 
-            // --- Lightbox Logic ---
-            const lightboxImg = document.getElementById('lightbox-img');
-            const images = Array.from(document.querySelectorAll('.gallery-item img')).map(img => img.src);
-            let currentIndex = 0;
+			// --- Lightbox Logic ---
+			const lightboxImg = document.getElementById('lightbox-img');
+			const images = Array.from(document.querySelectorAll('.gallery-item img')).map(img => img.src);
+			let currentIndex = 0;
 
-            function showLightbox(index) {
-                currentIndex = index;
-                lightboxImg.src = images[currentIndex];
-                lightbox.classList.remove('hidden');
-            }
+			function showLightbox(index) {
+				currentIndex = index;
+				lightboxImg.src = images[currentIndex];
+				lightbox.classList.remove('hidden');
+			}
 
-            function closeLightbox() {
-                lightbox.classList.add('hidden');
-            }
+			function closeLightbox() {
+				lightbox.classList.add('hidden');
+			}
 
-            function showNextImage() {
-                currentIndex = (currentIndex + 1) % images.length;
-                lightboxImg.src = images[currentIndex];
-            }
+			function showNextImage() {
+				currentIndex = (currentIndex + 1) % images.length;
+				lightboxImg.src = images[currentIndex];
+			}
 
-            function showPrevImage() {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                lightboxImg.src = images[currentIndex];
-            }
+			function showPrevImage() {
+				currentIndex = (currentIndex - 1 + images.length) % images.length;
+				lightboxImg.src = images[currentIndex];
+			}
 
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('hidden')) {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowRight') showNextImage();
-                    if (e.key === 'ArrowLeft') showPrevImage();
-                }
-            });
-            
-            // --- Hero Title Animation ---
-            const subheading = document.querySelector('.subheading');
-            const segments = ['बु', 'द्धि', 'शा', 'ही', '!'];
-            const scrambleChars = 'अआइईउऊएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह';
-            const funkyColors = ['#39FF14', '#FF073A', '#00FFFF', '#FF1493', '#FFFF00', '#F0F'];
-            let isAnimationRunning = false;
+			document.addEventListener('keydown', (e) => {
+				if (!lightbox.classList.contains('hidden')) {
+					if (e.key === 'Escape') closeLightbox();
+					if (e.key === 'ArrowRight') showNextImage();
+					if (e.key === 'ArrowLeft') showPrevImage();
+				}
+			});
+			
+			// --- Hero Title Animation ---
+			const subheading = document.querySelector('.subheading');
+			const segments = ['बु', 'द्धि', 'शा', 'ही', '!'];
+			const scrambleChars = 'अआइईउऊएऐओऔकखगघङचछजझञटठडढणतथदधनपफबभमयरलवशषसह';
+			const funkyColors = ['#39FF14', '#FF073A', '#00FFFF', '#FF1493', '#FFFF00', '#F0F'];
+			let isAnimationRunning = false;
 
-            const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+			const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-            const animateSegment = (element, targetChar) => {
-                return new Promise(resolve => {
-                    let iteration = 0;
-                    const interval = setInterval(() => {
-                        element.textContent = getRandomItem(scrambleChars);
-                        element.style.color = getRandomItem(funkyColors);
-                        
-                        if (iteration >= 8) {
-                            clearInterval(interval);
-                            element.textContent = targetChar;
-                            element.style.color = 'white';
-                            resolve();
-                        }
-                        iteration++;
-                    }, 60);
-                });
-            };
+			const animateSegment = (element, targetChar) => {
+				return new Promise(resolve => {
+					let iteration = 0;
+					const interval = setInterval(() => {
+						element.textContent = getRandomItem(scrambleChars);
+						element.style.color = getRandomItem(funkyColors);
+						
+						if (iteration >= 8) {
+							clearInterval(interval);
+							element.textContent = targetChar;
+							element.style.color = 'white';
+							resolve();
+						}
+						iteration++;
+					}, 60);
+				});
+			};
 
-            const runScrambleAnimation = async () => {
-                isAnimationRunning = true;
-                heroTitle.innerHTML = '';
-                heroTitle.classList.remove('typing-done');
-                subheading.style.opacity = '0';
+			const runScrambleAnimation = async () => {
+				isAnimationRunning = true;
+				heroTitle.innerHTML = '';
+				heroTitle.classList.remove('typing-done');
+				subheading.style.opacity = '0';
 
-                const spanElements = segments.map(() => {
-                    const span = document.createElement('span');
-                    heroTitle.appendChild(span);
-                    return span;
-                });
+				const spanElements = segments.map(() => {
+					const span = document.createElement('span');
+					heroTitle.appendChild(span);
+					return span;
+				});
 
-                for (let i = 0; i < segments.length; i++) {
-                    await animateSegment(spanElements[i], segments[i]);
-                }
+				for (let i = 0; i < segments.length; i++) {
+					await animateSegment(spanElements[i], segments[i]);
+				}
 
-                heroTitle.classList.add('typing-done');
-                subheading.style.opacity = '1';
-                isAnimationRunning = false;
-            };
+				heroTitle.classList.add('typing-done');
+				subheading.style.opacity = '1';
+				isAnimationRunning = false;
+			};
 
-            const handleClick = () => {
-                if (!heroTitle.classList.contains('typing-done') || isAnimationRunning) return;
-                isAnimationRunning = true;
-                heroTitle.classList.remove('typing-done');
-                subheading.style.opacity = '0';
+			const handleClick = () => {
+				if (!heroTitle.classList.contains('typing-done') || isAnimationRunning) return;
+				isAnimationRunning = true;
+				heroTitle.classList.remove('typing-done');
+				subheading.style.opacity = '0';
 
-                const spans = heroTitle.querySelectorAll('span');
-                const allFragments = [];
+				const spans = heroTitle.querySelectorAll('span');
+				const allFragments = [];
 
-                spans.forEach(span => {
-                    const rect = span.getBoundingClientRect();
-                    const spanCenterX = rect.left + rect.width / 2;
-                    const spanCenterY = rect.top + rect.height / 2;
+				spans.forEach(span => {
+					const rect = span.getBoundingClientRect();
+					const spanCenterX = rect.left + rect.width / 2;
+					const spanCenterY = rect.top + rect.height / 2;
 
-                    span.style.opacity = '0';
+					span.style.opacity = '0';
 
-                    for (let i = 0; i < 15; i++) {
-                        const fragment = document.createElement('div');
-                        fragment.style.position = 'absolute';
-                        fragment.style.left = `${spanCenterX}px`;
-                        fragment.style.top = `${spanCenterY}px`;
-                        fragment.style.width = `${Math.random() * 8 + 4}px`;
-                        fragment.style.height = fragment.style.width;
-                        fragment.style.background = getRandomItem(funkyColors);
-                        fragment.style.borderRadius = '50%';
-                        fragment.style.transition = 'transform 1s cubic-bezier(0.19, 1, 0.22, 1)';
-                        document.body.appendChild(fragment);
-                        allFragments.push(fragment);
+					for (let i = 0; i < 15; i++) {
+						const fragment = document.createElement('div');
+						fragment.style.position = 'absolute';
+						fragment.style.left = `${spanCenterX}px`;
+						fragment.style.top = `${spanCenterY}px`;
+						fragment.style.width = `${Math.random() * 8 + 4}px`;
+						fragment.style.height = fragment.style.width;
+						fragment.style.background = getRandomItem(funkyColors);
+						fragment.style.borderRadius = '50%';
+						fragment.style.transition = 'transform 1s cubic-bezier(0.19, 1, 0.22, 1)';
+						document.body.appendChild(fragment);
+						allFragments.push(fragment);
 
-                        setTimeout(() => {
-                            const x = (Math.random() - 0.5) * 400;
-                            const y = (Math.random() - 0.5) * 400;
-                            const rot = (Math.random() - 0.5) * 720;
-                            fragment.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-                        }, 10);
-                    }
-                });
+						setTimeout(() => {
+							const x = (Math.random() - 0.5) * 400;
+							const y = (Math.random() - 0.5) * 400;
+							const rot = (Math.random() - 0.5) * 720;
+							fragment.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+						}, 10);
+					}
+				});
 
-                setTimeout(() => {
-                    allFragments.forEach(fragment => {
-                        fragment.style.transition = 'transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-in';
-                        fragment.style.transform = 'translate(0, 0) rotate(0deg)';
-                        fragment.style.opacity = '0';
-                    });
-                }, 800);
+				setTimeout(() => {
+					allFragments.forEach(fragment => {
+						fragment.style.transition = 'transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-in';
+						fragment.style.transform = 'translate(0, 0) rotate(0deg)';
+						fragment.style.opacity = '0';
+					});
+				}, 800);
 
-                setTimeout(() => {
-                    allFragments.forEach(fragment => fragment.remove());
-                    runScrambleAnimation().then(() => {
-                        isAnimationRunning = false;
-                    });
-                }, 1400);
-            };
+				setTimeout(() => {
+					allFragments.forEach(fragment => fragment.remove());
+					runScrambleAnimation().then(() => {
+						isAnimationRunning = false;
+					});
+				}, 1400);
+			};
 
-            heroTitle.addEventListener('mouseover', () => {
-                if (heroTitle.classList.contains('typing-done')) {
-                    heroTitle.style.setProperty('--glow-color', getRandomItem(funkyColors));
-                }
-            });
-            heroTitle.addEventListener('click', handleClick);
+			heroTitle.addEventListener('mouseover', () => {
+				if (heroTitle.classList.contains('typing-done')) {
+					heroTitle.style.setProperty('--glow-color', getRandomItem(funkyColors));
+				}
+			});
+			heroTitle.addEventListener('click', handleClick);
 
-            // Initial Run
-            runScrambleAnimation();
-            
-        });
-    </script>
+			// Initial Run
+			runScrambleAnimation();
+			
+		});
+	</script>
 
 </body>
 </html>
